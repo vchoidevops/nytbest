@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  BooksViewController.swift
 //  NYBest
 //
 //  Created by victor.choi on 2/12/22.
@@ -7,13 +7,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class BooksViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
+        self.view.backgroundColor = .yellow
     }
-
-
+    
 }
-
