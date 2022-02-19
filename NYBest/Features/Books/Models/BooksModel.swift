@@ -17,6 +17,15 @@ enum SectionConstants {
     case genreGroup
     case bookGroup
     
+    var headerSize: NSCollectionLayoutSize {
+        switch self {
+        case .genreGroup:
+            return NSCollectionLayoutSize(widthDimension: .absolute(0), heightDimension: .absolute(0))
+        default:
+            return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(21))
+        }
+    }
+    
     var columnCount: Int {
         switch self {
         case .bookGroup:
@@ -38,7 +47,7 @@ enum SectionConstants {
         case .genreGroup:
             return .absolute(73)
         default:
-            return .absolute(204.57)
+            return .absolute(173.57)
         }
     }
 }

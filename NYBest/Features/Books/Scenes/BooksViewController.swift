@@ -12,6 +12,7 @@ class BooksViewController: UIViewController {
     
     var collectionView: UICollectionView!
     var datasource: UICollectionViewDiffableDataSource<CompositeSection, AnyHashable>! = nil
+    var bookListHeaders: [String] = []
     
     override func viewWillAppear(_ animated: Bool) {
         viewModel = BooksViewModel()
@@ -31,7 +32,7 @@ class BooksViewController: UIViewController {
             .sink { error in
                 print("TEST ===== \(error)")
             } receiveValue: { [weak self] results in
-                guard let self = self, let results = results else { return }
+                guard let self = self else { return }
                 self.configDataSource()
                 self.collectionView.reloadData()
             }
@@ -55,6 +56,11 @@ extension BooksViewController {
             section.interGroupSpacing = 8
             section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
             section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 16, bottom: 20, trailing: 16)
+            
+            if sectionIndex != 0 {
+                let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: sectionConstant.headerSize , elementKind: "Header", alignment: .topLeading)
+                section.boundarySupplementaryItems = [header]
+            }
             return section
         }
         return layout
@@ -66,6 +72,7 @@ extension BooksViewController {
         collectionView.delegate = self
 //        collectionView.dataSource = self
         view.addSubview(collectionView)
+        
         
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -95,6 +102,26 @@ extension BooksViewController {
             }
         })
         
+        let headerRegistration = UICollectionView.SupplementaryRegistration
+        <BookListHeaderView>(elementKind: "Header") {
+            (supplementaryView, title, indexPath) in
+            let section = self.datasource.snapshot().sectionIdentifiers[0]
+            guard let items = self.datasource.snapshot().itemIdentifiers(inSection: section) as? [Genre] else { return }
+            supplementaryView.label.text = "\(items[indexPath.section-1].listName)"
+            supplementaryView.backgroundColor = .clear
+            supplementaryView.layer.borderColor = UIColor.black.cgColor
+            supplementaryView.layer.borderWidth = 0
+        }
+        datasource.supplementaryViewProvider = {
+            [weak self] collectionView, kind, indexPath in
+            print("Supplementary... \(kind) \(indexPath.row) \(indexPath.section)")
+            if indexPath.section != 0 {
+                return collectionView.dequeueConfiguredReusableSupplementary(using: headerRegistration, for: indexPath)
+            } else {
+                return UICollectionReusableView()
+            }
+        }
+        
         var snapshotList = NSDiffableDataSourceSnapshot<CompositeSection, AnyHashable>()
         
         guard let viewModel = viewModel, let genres = viewModel.genres.value else { return }
@@ -105,12 +132,15 @@ extension BooksViewController {
         sections.append(contentsOf: layoutKinds)
         snapshotList.appendSections(sections)
         snapshotList.appendItems(genres, toSection: layoutKind)
+        
         for genre in genres {
+            bookListHeaders.append(genre.listName)
             snapshotList.appendItems(genre.books, toSection: CompositeSection(id: genre.listNameEncoded))
         }
         datasource.apply(snapshotList, animatingDifferences: false)
     }
 }
+
 extension BooksViewController: UICollectionViewDelegate {
     
 }
