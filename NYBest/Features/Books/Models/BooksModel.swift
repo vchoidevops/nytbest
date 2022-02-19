@@ -6,6 +6,54 @@
 //
 
 import Foundation
+import UIKit
+
+enum SectionLayoutKind: Int, CaseIterable {
+    case genre
+    case books
+}
+
+enum SectionConstants {
+    case genreGroup
+    case bookGroup
+    
+    var columnCount: Int {
+        switch self {
+        case .bookGroup:
+            return 3
+        default:
+            return 3
+        }
+    }
+    var itemSize: NSCollectionLayoutSize {
+        switch self {
+        case .genreGroup:
+            return NSCollectionLayoutSize(widthDimension: .absolute(114.06), heightDimension: .absolute(73))
+        default:
+            return NSCollectionLayoutSize(widthDimension: .absolute(204.57), heightDimension: .absolute(173.57))
+        }
+    }
+    var groupHeight: NSCollectionLayoutDimension {
+        switch self {
+        case .genreGroup:
+            return .absolute(73)
+        default:
+            return .absolute(204.57)
+        }
+    }
+}
+
+struct CompositeSection: Hashable, Identifiable {
+    let id: String
+    
+    static func == (lhs: CompositeSection, rhs: CompositeSection) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.id)
+    }
+}
 
 // MARK: - Bestsellers
 struct Bestsellers: Codable {
@@ -23,7 +71,7 @@ struct Bestsellers: Codable {
 // MARK: - BestSellerResults
 struct BestSellerResults: Codable {
     let nextPublishedDate, bestsellersDate, publishedDate, publishedDateDescription, previousPublishedDate: String?
-    let lists: [BookList]?
+    let lists: [Genre]?
 
     enum CodingKeys: String, CodingKey {
         case bestsellersDate = "bestsellers_date"
@@ -36,8 +84,8 @@ struct BestSellerResults: Codable {
 }
 
 // MARK: - List
-struct BookList: Codable, Identifiable, Hashable {
-    static func == (lhs: BookList, rhs: BookList) -> Bool {
+struct Genre: Codable, Identifiable, Hashable {
+    static func == (lhs: Genre, rhs: Genre) -> Bool {
         return lhs.id == rhs.id
     }
     func hash(into hasher: inout Hasher) {
@@ -65,11 +113,12 @@ struct BookList: Codable, Identifiable, Hashable {
 
 // MARK: - Book
 struct Book: Codable, Hashable, Equatable {
+    let id: UUID = UUID()
     static func == (lhs: Book, rhs: Book) -> Bool {
-        return lhs.primaryIsbn10 == rhs.primaryIsbn10
+        return lhs.id == rhs.id
     }
     func hash(into hasher: inout Hasher) {
-        hasher.combine(primaryIsbn10)
+        hasher.combine(id)
     }
     let ageGroup: String
     let amazonProductURL: String

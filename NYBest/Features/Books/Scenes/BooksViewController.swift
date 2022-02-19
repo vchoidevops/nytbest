@@ -11,7 +11,7 @@ class BooksViewController: UIViewController {
     var viewModel: BooksViewModel?
     
     var collectionView: UICollectionView!
-    var datasource: UICollectionViewDiffableDataSource<SectionLayoutKind, [BookList]>! = nil
+    var datasource: UICollectionViewDiffableDataSource<CompositeSection, AnyHashable>! = nil
     
     override func viewWillAppear(_ animated: Bool) {
         viewModel = BooksViewModel()
@@ -26,7 +26,7 @@ class BooksViewController: UIViewController {
     }
     
     private func setupBindings(_ viewModel: BooksViewModel) {
-        viewModel.booklist
+        viewModel.genres
             .receive(on: RunLoop.main, options: nil)
             .sink { error in
                 print("TEST ===== \(error)")
@@ -39,52 +39,16 @@ class BooksViewController: UIViewController {
     }
 }
 
-enum SectionLayoutKind: Int, CaseIterable {
-    case genres
-    case booksByGenre
-    static func getLayoutKind(_ sectionIndex: Int) -> SectionLayoutKind {
-        if sectionIndex == 0 {
-            return .genres
-        } else {
-            return .booksByGenre
-        }
-    }
-    var columnCount: Int {
-        switch self {
-        case .booksByGenre:
-            return 3
-        default:
-            return 3
-        }
-    }
-    var itemSize: NSCollectionLayoutSize {
-        switch self {
-        case .genres:
-            return NSCollectionLayoutSize(widthDimension: .absolute(114.06), heightDimension: .absolute(73))
-        default:
-            return NSCollectionLayoutSize(widthDimension: .absolute(204.57), heightDimension: .absolute(173.57))
-        }
-    }
-    var groupHeight: NSCollectionLayoutDimension {
-        switch self {
-        case .genres:
-            return .absolute(73)
-        default:
-            return .absolute(204.57)
-        }
-    }
-}
-
 extension BooksViewController {
     private func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) in
-            let sectionLayoutKind = SectionLayoutKind.getLayoutKind(sectionIndex)
+            let sectionConstant = sectionIndex == 0 ? SectionConstants.genreGroup : SectionConstants.bookGroup
             
-            let columns = sectionLayoutKind.columnCount
-            let item = NSCollectionLayoutItem(layoutSize: sectionLayoutKind.itemSize)
+            let columns = sectionConstant.columnCount
+            let item = NSCollectionLayoutItem(layoutSize: sectionConstant.itemSize)
             item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 6.94)
             
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: sectionLayoutKind.groupHeight)
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: sectionConstant.groupHeight)
             
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: columns)
             let section = NSCollectionLayoutSection(group: group)
@@ -111,37 +75,39 @@ extension BooksViewController {
         ])
     }
     private func configDataSource() {
-        let genreCellRegistration = UICollectionView.CellRegistration<UICollectionViewCell, [BookList]> { cell, indexPath, items in
+        let genreCellRegistration = UICollectionView.CellRegistration<UICollectionViewCell, Genre> { cell, indexPath, item in
             var genreConfig = GenreViewConfiguration()
-            genreConfig.text = "\(items[indexPath.row].listName)"
+            genreConfig.text = "\(item.displayName)"
             cell.contentConfiguration = genreConfig
         }
-        let bookCellRegistration = UICollectionView.CellRegistration<UICollectionViewCell, [Book]> { cell, indexPath, items in
-            cell.contentView.backgroundColor = .blue
-            cell.contentView.layer.borderColor = UIColor.black.cgColor
-            cell.contentView.layer.borderWidth = 1.2
-            cell.contentView.layer.cornerRadius = SectionLayoutKind.getLayoutKind(indexPath.section) == .genres ? 0 : 8
+        let bookCellRegistration = UICollectionView.CellRegistration<UICollectionViewCell, Book> { cell, indexPath, item in
+            let bookConfig = BookViewConfiguration(imageURL: item.bookImage)
+            cell.contentConfiguration = bookConfig
         }
         
-        datasource = UICollectionViewDiffableDataSource<SectionLayoutKind, [BookList]>(collectionView: collectionView) { (collectionView: UICollectionView, indexPath: IndexPath, items: [BookList]) -> UICollectionViewCell? in
-            print("Index Path: ", indexPath.section)
-            return SectionLayoutKind.getLayoutKind(indexPath.section) == .genres ? collectionView.dequeueConfiguredReusableCell(using: genreCellRegistration, for: indexPath, item: items)
-            : collectionView.dequeueConfiguredReusableCell(using: bookCellRegistration, for: indexPath, item: items[indexPath.section].books)
+        datasource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+            if let item = itemIdentifier as? Genre {
+                return collectionView.dequeueConfiguredReusableCell(using: genreCellRegistration, for: indexPath, item: item)
+            } else if let item = itemIdentifier as? Book {
+                return collectionView.dequeueConfiguredReusableCell(using: bookCellRegistration, for: indexPath, item: item)
+            } else {
+                fatalError()
+            }
+        })
+        
+        var snapshotList = NSDiffableDataSourceSnapshot<CompositeSection, AnyHashable>()
+        
+        guard let viewModel = viewModel, let genres = viewModel.genres.value else { return }
+        
+        let layoutKind = CompositeSection(id: "genres")
+        var sections: [CompositeSection] = [layoutKind]
+        let layoutKinds = genres.map { CompositeSection(id: $0.listNameEncoded) }
+        sections.append(contentsOf: layoutKinds)
+        snapshotList.appendSections(sections)
+        snapshotList.appendItems(genres, toSection: layoutKind)
+        for genre in genres {
+            snapshotList.appendItems(genre.books, toSection: CompositeSection(id: genre.listNameEncoded))
         }
-        
-//        let itemPerSection = 10
-        var snapshotList = NSDiffableDataSourceSnapshot<SectionLayoutKind, [BookList]>()
-//        var snapshotBooks = NSDiffableDataSourceSnapshot<SectionLayoutKind, [[Book]]>()
-        
-        guard let viewModel = viewModel, let booklist = viewModel.booklist.value else { return }
-        
-        for idx in 0..<1 {
-            let layoutKind = SectionLayoutKind.getLayoutKind(idx)
-            snapshotList.appendSections([layoutKind])
-            snapshotList.appendItems([booklist], toSection: .genres)
-//            snapshotBooks.appendSections(<#T##identifiers: [SectionLayoutKind]##[SectionLayoutKind]#>)
-        }
-        
         datasource.apply(snapshotList, animatingDifferences: false)
     }
 }

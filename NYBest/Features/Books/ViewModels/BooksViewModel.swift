@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 final class BooksViewModel {
-    var booklist = CurrentValueSubject<[BookList]?, Error>(nil)
+    var genres = CurrentValueSubject<[Genre]?, Error>(nil)
     var trashBag = Set<AnyCancellable>()
     
     init() {
@@ -23,16 +23,15 @@ final class BooksViewModel {
             .map(\.results)
             .map(\.lists)
             .sink(receiveCompletion: { error in
-                print("ERROR: \(error)")
                 switch error {
                 case .failure(let error):
-                    self.booklist.send(completion: .failure(error))
+                    self.genres.send(completion: .failure(error))
                 case .finished:
-                    self.booklist.send(completion: .finished)
+                    self.genres.send(completion: .finished)
                 }
-            }, receiveValue: { data in
-                guard let data = data else { return }
-                self.booklist.send(data)
+            }, receiveValue: { [weak self] data in
+                guard let data = data, let self = self else { return }
+                self.genres.send(data)
             })
             .store(in: &trashBag)
 

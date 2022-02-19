@@ -14,12 +14,20 @@ class GenreView: UIView, UIContentView {
             self.configure(configuration: configuration)
         }
     }
+    var newYorkFont: UIFont {
+        let descriptor = UIFont.systemFont(ofSize: 12, weight: .semibold).fontDescriptor
+        if let self = descriptor.withDesign(.serif) {
+            return UIFont(descriptor: self, size: 0)
+        }
+        return UIFont(descriptor: descriptor, size: 0)
+    }
     init(_ configuration: UIContentConfiguration) {
         self.configuration = configuration
         super.init(frame: .zero)
         self.frame = CGRect(x: 0, y: 0, width: 114.06, height: 73)
-        self.textLabel.lineBreakMode = .byWordWrapping
+        self.textLabel.lineBreakMode = .byCharWrapping
         self.textLabel.numberOfLines = 0
+        self.textLabel.font = newYorkFont.withSize(12)
         self.layer.borderWidth = 1.2
         self.layer.borderColor = CGColor(red: 42/255, green: 42/255, blue: 42/255, alpha: 1.0)
         self.layer.cornerRadius = CGFloat(7)
@@ -29,7 +37,9 @@ class GenreView: UIView, UIContentView {
         
         NSLayoutConstraint.activate([
             textLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            textLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+            textLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            textLabel.heightAnchor.constraint(equalToConstant: 52),
+            textLabel.widthAnchor.constraint(equalToConstant: 104)
             ])
         self.configure(configuration: configuration)
     }
@@ -41,6 +51,7 @@ class GenreView: UIView, UIContentView {
         guard let config = configuration as? GenreViewConfiguration else { return }
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineBreakMode = .byWordWrapping
+        
         textLabel.attributedText = NSAttributedString(string: config.text, attributes: [
             NSAttributedString.Key.paragraphStyle: paragraphStyle
         ])
