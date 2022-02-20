@@ -6,13 +6,15 @@
 //
 
 import UIKit
+import Combine
 
 class BooksViewController: UIViewController {
     var viewModel: BooksViewModel?
     
     var collectionView: UICollectionView!
     var datasource: UICollectionViewDiffableDataSource<CompositeSection, AnyHashable>! = nil
-    var bookListHeaders: [String] = []
+    
+    var searchBar: UISearchBar!
     
     override func viewWillAppear(_ animated: Bool) {
         viewModel = BooksViewModel()
@@ -20,10 +22,27 @@ class BooksViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .blue
+        self.view.backgroundColor = .systemBackground
+        self.setupSearchField()
         self.setupCollectionView()
         self.configDataSource()
+        
 //        self.setupBindings()
+    }
+    
+    private func setupSearchField() {
+        searchBar = UISearchBar()
+        searchBar.backgroundColor = .systemBackground
+        searchBar.delegate = self
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(searchBar)
+        
+        NSLayoutConstraint.activate([
+            searchBar.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
+            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+            searchBar.heightAnchor.constraint(equalToConstant: 44)
+        ])
     }
     
     private func setupBindings(_ viewModel: BooksViewModel) {
@@ -67,15 +86,14 @@ extension BooksViewController {
     }
     private func setupCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
-        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .systemBackground
         collectionView.delegate = self
 //        collectionView.dataSource = self
         view.addSubview(collectionView)
         
-        
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
@@ -114,7 +132,6 @@ extension BooksViewController {
         }
         datasource.supplementaryViewProvider = {
             [weak self] collectionView, kind, indexPath in
-            print("Supplementary... \(kind) \(indexPath.row) \(indexPath.section)")
             if indexPath.section != 0 {
                 return collectionView.dequeueConfiguredReusableSupplementary(using: headerRegistration, for: indexPath)
             } else {
@@ -134,7 +151,6 @@ extension BooksViewController {
         snapshotList.appendItems(genres, toSection: layoutKind)
         
         for genre in genres {
-            bookListHeaders.append(genre.listName)
             snapshotList.appendItems(genre.books, toSection: CompositeSection(id: genre.listNameEncoded))
         }
         datasource.apply(snapshotList, animatingDifferences: false)
@@ -143,4 +159,12 @@ extension BooksViewController {
 
 extension BooksViewController: UICollectionViewDelegate {
     
+}
+
+extension BooksViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("Search Text: \(searchText)")
+        guard let viewModel = self.viewModel else { return }
+        viewModel.searchText.send(searchText)
+    }
 }

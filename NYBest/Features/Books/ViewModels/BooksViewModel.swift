@@ -10,6 +10,7 @@ import Combine
 
 final class BooksViewModel {
     var genres = CurrentValueSubject<[Genre]?, Error>(nil)
+    var searchText = CurrentValueSubject<String?, Never>(nil)
     var trashBag = Set<AnyCancellable>()
     
     init() {
@@ -34,8 +35,23 @@ final class BooksViewModel {
                 self.genres.send(data)
             })
             .store(in: &trashBag)
-
     }
     
-    
+    private func setupSearchTextBinding() {
+        searchText.debounce(for: 0.5, scheduler: RunLoop.main, options: nil)
+            .compactMap { $0 }
+            .tryMap { text in
+                guard let genres = self.genres.value else { fatalError() }
+                let result = genres.filter { genre in
+                    return genre.books.filter { book in
+                        return book.title.contains(text)
+                    }
+                }
+            }
+            
+            
+            
+            
+            
+    }
 }
