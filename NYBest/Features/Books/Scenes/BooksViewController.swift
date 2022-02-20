@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 class BooksViewController: UIViewController {
-    var viewModel: BooksViewModel?
+    lazy var viewModel: BooksViewModel = BooksViewModel()
     
     var collectionView: UICollectionView!
     var datasource: UICollectionViewDiffableDataSource<CompositeSection, AnyHashable>! = nil
@@ -17,8 +17,7 @@ class BooksViewController: UIViewController {
     var searchBar: UISearchBar!
     
     override func viewWillAppear(_ animated: Bool) {
-        viewModel = BooksViewModel()
-        self.setupBindings(viewModel!)
+//        self.setupBindings()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +25,7 @@ class BooksViewController: UIViewController {
         self.setupSearchField()
         self.setupCollectionView()
         self.configDataSource()
-        
-//        self.setupBindings()
+        self.setupBindings()
     }
     
     private func setupSearchField() {
@@ -45,11 +43,17 @@ class BooksViewController: UIViewController {
         ])
     }
     
-    private func setupBindings(_ viewModel: BooksViewModel) {
+    private func setupBindings() {
         viewModel.genres
             .receive(on: RunLoop.main, options: nil)
+            .print("Data is updated! \(viewModel.genres)")
             .sink { error in
-                print("TEST ===== \(error)")
+                switch error {
+                case .failure(let error):
+                    print("ERROR:\(error)")
+                case .finished:
+                    print("FINISHED")
+                }
             } receiveValue: { [weak self] results in
                 guard let self = self else { return }
                 self.configDataSource()
@@ -141,7 +145,7 @@ extension BooksViewController {
         
         var snapshotList = NSDiffableDataSourceSnapshot<CompositeSection, AnyHashable>()
         
-        guard let viewModel = viewModel, let genres = viewModel.genres.value else { return }
+        guard let genres = viewModel.genres.value else { return }
         
         let layoutKind = CompositeSection(id: "genres")
         var sections: [CompositeSection] = [layoutKind]
@@ -164,7 +168,6 @@ extension BooksViewController: UICollectionViewDelegate {
 extension BooksViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("Search Text: \(searchText)")
-        guard let viewModel = self.viewModel else { return }
         viewModel.searchText.send(searchText)
     }
 }
