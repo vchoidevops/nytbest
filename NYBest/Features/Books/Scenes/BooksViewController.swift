@@ -16,9 +16,6 @@ class BooksViewController: UIViewController {
     
     var searchBar: UISearchBar!
     
-    override func viewWillAppear(_ animated: Bool) {
-//        self.setupBindings()
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemBackground
@@ -26,8 +23,18 @@ class BooksViewController: UIViewController {
         self.setupCollectionView()
         self.configDataSource()
         self.setupBindings()
+        self.setupNavigationItem()
     }
-    
+    private func setupNavigationItem() {
+        let label = UILabel()
+        guard let descriptor = UIFont.systemFont(ofSize: 24, weight: .semibold).fontDescriptor.withDesign(.serif) else { return }
+        let font = UIFont(descriptor: descriptor, size: 18)
+        label.text = "NY Bests"
+        label.font = font
+        self.navigationItem.titleView = label
+        self.navigationItem.largeTitleDisplayMode = .always
+        
+    }
     private func setupSearchField() {
         searchBar = UISearchBar()
         searchBar.backgroundColor = .systemBackground
@@ -46,7 +53,6 @@ class BooksViewController: UIViewController {
     private func setupBindings() {
         viewModel.genres
             .receive(on: RunLoop.main, options: nil)
-            .print("Data is updated! \(viewModel.genres)")
             .sink { error in
                 switch error {
                 case .failure(let error):
@@ -93,7 +99,6 @@ extension BooksViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .systemBackground
         collectionView.delegate = self
-//        collectionView.dataSource = self
         view.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
@@ -106,6 +111,7 @@ extension BooksViewController {
     private func configDataSource() {
         let genreCellRegistration = UICollectionView.CellRegistration<UICollectionViewCell, Genre> { cell, indexPath, item in
             var genreConfig = GenreViewConfiguration()
+            genreConfig.isSelected = self.viewModel.listFilters.value.contains(indexPath.row)
             genreConfig.text = "\(item.displayName)"
             cell.contentConfiguration = genreConfig
         }
@@ -127,9 +133,8 @@ extension BooksViewController {
         let headerRegistration = UICollectionView.SupplementaryRegistration
         <BookListHeaderView>(elementKind: "Header") {
             (supplementaryView, title, indexPath) in
-            let section = self.datasource.snapshot().sectionIdentifiers[0]
-            guard let items = self.datasource.snapshot().itemIdentifiers(inSection: section) as? [Genre] else { return }
-            supplementaryView.label.text = "\(items[indexPath.section-1].listName)"
+            guard let values = self.viewModel.genres.value else { return }
+            supplementaryView.label.text = "\(values[indexPath.section - 1].listName)"
             supplementaryView.backgroundColor = .clear
             supplementaryView.layer.borderColor = UIColor.black.cgColor
             supplementaryView.layer.borderWidth = 0
@@ -152,7 +157,7 @@ extension BooksViewController {
         let layoutKinds = genres.map { CompositeSection(id: $0.listNameEncoded) }
         sections.append(contentsOf: layoutKinds)
         snapshotList.appendSections(sections)
-        snapshotList.appendItems(genres, toSection: layoutKind)
+        snapshotList.appendItems(viewModel.totalGenres, toSection: layoutKind)
         
         for genre in genres {
             snapshotList.appendItems(genre.books, toSection: CompositeSection(id: genre.listNameEncoded))
@@ -162,12 +167,28 @@ extension BooksViewController {
 }
 
 extension BooksViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            
+            guard let cell = collectionView.cellForItem(at: indexPath) else { fatalError() }
+            
+            var filters: Set<Int> = viewModel.listFilters.value
+            if filters.contains(indexPath.row) {
+                filters.remove(indexPath.row)
+            } else {
+                filters.insert(indexPath.row)
+            }
+            var genreConfig = cell.contentConfiguration as! GenreViewConfiguration
+            genreConfig.isSelected = filters.contains(indexPath.row)
+            cell.contentConfiguration = genreConfig
+            
+            viewModel.listFilters.send(filters)
+        }
+    }
 }
 
 extension BooksViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("Search Text: \(searchText)")
         viewModel.searchText.send(searchText)
     }
 }

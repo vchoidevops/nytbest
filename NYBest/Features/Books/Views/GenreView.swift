@@ -9,6 +9,8 @@ import UIKit
 
 class GenreView: UIView, UIContentView {
     var textLabel: UILabel = UILabel()
+    var isSelected: Bool = false
+    
     var configuration: UIContentConfiguration {
         didSet {
             self.configure(configuration: configuration)
@@ -49,7 +51,11 @@ class GenreView: UIView, UIContentView {
     
     func configure(configuration: UIContentConfiguration) {
         guard let config = configuration as? GenreViewConfiguration else { return }
+        
+        self.textLabel.textColor = config.isSelected ? .white : .black
+        self.backgroundColor = config.isSelected ? .black : .systemBackground
         let paragraphStyle = NSMutableParagraphStyle()
+        
         paragraphStyle.lineBreakMode = .byWordWrapping
         
         textLabel.attributedText = NSAttributedString(string: config.text, attributes: [
@@ -60,6 +66,8 @@ class GenreView: UIView, UIContentView {
 
 struct GenreViewConfiguration: UIContentConfiguration {
     var text: String = ""
+    var isSelected: Bool = false
+    
     func makeContentView() -> UIView & UIContentView {
         return GenreView(self)
     }

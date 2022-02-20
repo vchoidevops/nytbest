@@ -15,7 +15,7 @@ class NYBestRootViewController: UITabBarController {
     }
     
     private func setupTabItems() {
-        viewControllers = [MoviesViewController(), BooksViewController()]
+        viewControllers = [MoviesViewController(), BookNavigationViewController()]
         guard let vcs = viewControllers else { return }
         selectedViewController = vcs[0]
         
