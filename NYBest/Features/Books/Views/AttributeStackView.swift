@@ -16,7 +16,7 @@ class AttributeStackView: UIStackView {
     }()
     private var contentLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = UIColor(named: "Selected")
         label.numberOfLines = 0
         label.textAlignment = .left
         label.font = .systemFont(ofSize: 12)

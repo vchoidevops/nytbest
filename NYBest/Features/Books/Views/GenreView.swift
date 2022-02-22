@@ -46,8 +46,8 @@ class GenreView: UIView, UIContentView {
     func configure(configuration: UIContentConfiguration) {
         guard let config = configuration as? GenreViewConfiguration else { return }
         
-        self.textLabel.textColor = config.isSelected ? .white : .black
-        self.backgroundColor = config.isSelected ? .black : .systemBackground
+        self.textLabel.textColor = config.isSelected ? UIColor(named: "Background") : UIColor(named: "Selected")
+        self.backgroundColor = config.isSelected ? UIColor(named: "Selected") : UIColor(named: "Background")
         let paragraphStyle = NSMutableParagraphStyle()
         
         paragraphStyle.lineBreakMode = .byWordWrapping

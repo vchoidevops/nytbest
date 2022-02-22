@@ -30,13 +30,12 @@ class BooksViewController: UIViewController {
         
     }
     private func setupTapRecognizer() {
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleKeyboardNotification))
-        view.addGestureRecognizer(tapRecognizer)
-        tapRecognizer.delegate = self
+//        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleKeyboardNotification))
+//        view.addGestureRecognizer(tapRecognizer)
     }
     
     @objc private func handleKeyboardNotification(gesture: UITapGestureRecognizer) {
-        searchBar.endEditing(true)
+//        searchBar.endEditing(true)
     }
     
     private func setupNavigationItem() {
@@ -215,16 +214,5 @@ extension BooksViewController: UISearchBarDelegate {
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-    }
-}
-extension BooksViewController: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        print("Touched View: \(touch.view!.superview!.superclass!)")
-        if !touch.view!.superview!.superclass!.isSubclass(of: UISearchBar.self) {
-            touch.view!.resignFirstResponder()
-            return true
-        } else {
-            return true
-        }
     }
 }
