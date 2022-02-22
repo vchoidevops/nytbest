@@ -24,7 +24,21 @@ class BooksViewController: UIViewController {
         self.configDataSource()
         self.setupBindings()
         self.setupNavigationItem()
+        
+        // 1. Check Where a user taps
+        setupTapRecognizer()
+        
     }
+    private func setupTapRecognizer() {
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleKeyboardNotification))
+        view.addGestureRecognizer(tapRecognizer)
+        tapRecognizer.delegate = self
+    }
+    
+    @objc private func handleKeyboardNotification(gesture: UITapGestureRecognizer) {
+        searchBar.endEditing(true)
+    }
+    
     private func setupNavigationItem() {
         let label = UILabel()
         guard let descriptor = UIFont.systemFont(ofSize: 24, weight: .semibold).fontDescriptor.withDesign(.serif) else { return }
@@ -198,5 +212,19 @@ extension BooksViewController: UICollectionViewDelegate {
 extension BooksViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         viewModel.searchText.send(searchText)
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+}
+extension BooksViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        print("Touched View: \(touch.view!.superview!.superclass!)")
+        if !touch.view!.superview!.superclass!.isSubclass(of: UISearchBar.self) {
+            touch.view!.resignFirstResponder()
+            return true
+        } else {
+            return true
+        }
     }
 }

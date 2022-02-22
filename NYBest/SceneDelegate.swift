@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         print("SCene...")
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = NYBestRootViewController()
+        window.rootViewController = BookNavigationViewController()
         window.makeKeyAndVisible()
         self.window = window
     }

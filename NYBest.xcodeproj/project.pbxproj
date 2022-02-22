@@ -12,14 +12,12 @@
 		665092FD27C165FD00D867B9 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665092FC27C165FD00D867B9 /* ImageCache.swift */; };
 		6650930127C18AE300D867B9 /* BookListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6650930027C18AE300D867B9 /* BookListHeaderView.swift */; };
 		6650930327C271CD00D867B9 /* BookNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6650930227C271CD00D867B9 /* BookNavigationViewController.swift */; };
-		66604EF727B8A94400979B0F /* NYBestRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66604EF627B8A94400979B0F /* NYBestRootViewController.swift */; };
 		66604EF927B8ABE400979B0F /* BooksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66604EF827B8ABE400979B0F /* BooksViewModel.swift */; };
 		66604EFB27B8AC2A00979B0F /* NYTBooksAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66604EFA27B8AC2A00979B0F /* NYTBooksAPI.swift */; };
 		66604EFD27B8B37B00979B0F /* BooksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66604EFC27B8B37B00979B0F /* BooksModel.swift */; };
 		66604F0227B961FB00979B0F /* GenreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66604F0127B961FB00979B0F /* GenreView.swift */; };
 		667F309927B88494004B9294 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667F309827B88494004B9294 /* AppDelegate.swift */; };
 		667F309B27B88494004B9294 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667F309A27B88494004B9294 /* SceneDelegate.swift */; };
-		667F309D27B88494004B9294 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667F309C27B88494004B9294 /* MoviesViewController.swift */; };
 		667F30A227B88496004B9294 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 667F30A127B88496004B9294 /* Assets.xcassets */; };
 		667F30A527B88496004B9294 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 667F30A327B88496004B9294 /* LaunchScreen.storyboard */; };
 		66A4331C27C40B8F00E00915 /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A4331B27C40B8F00E00915 /* BookDetailViewController.swift */; };
@@ -36,7 +34,6 @@
 		665092FC27C165FD00D867B9 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		6650930027C18AE300D867B9 /* BookListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListHeaderView.swift; sourceTree = "<group>"; };
 		6650930227C271CD00D867B9 /* BookNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookNavigationViewController.swift; sourceTree = "<group>"; };
-		66604EF627B8A94400979B0F /* NYBestRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYBestRootViewController.swift; sourceTree = "<group>"; };
 		66604EF827B8ABE400979B0F /* BooksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksViewModel.swift; sourceTree = "<group>"; };
 		66604EFA27B8AC2A00979B0F /* NYTBooksAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYTBooksAPI.swift; sourceTree = "<group>"; };
 		66604EFC27B8B37B00979B0F /* BooksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksModel.swift; sourceTree = "<group>"; };
@@ -44,7 +41,6 @@
 		667F309527B88494004B9294 /* NYBest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NYBest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		667F309827B88494004B9294 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		667F309A27B88494004B9294 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		667F309C27B88494004B9294 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
 		667F30A127B88496004B9294 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		667F30A427B88496004B9294 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		668CEA9B27B8A4B100293264 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -132,8 +128,6 @@
 		667F30C927B8854D004B9294 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				66604EF627B8A94400979B0F /* NYBestRootViewController.swift */,
-				667F30CB27B8855D004B9294 /* Movies */,
 				667F30CA27B88553004B9294 /* Books */,
 			);
 			path = Features;
@@ -149,38 +143,6 @@
 				6650930227C271CD00D867B9 /* BookNavigationViewController.swift */,
 			);
 			path = Books;
-			sourceTree = "<group>";
-		};
-		667F30CB27B8855D004B9294 /* Movies */ = {
-			isa = PBXGroup;
-			children = (
-				667F30CE27B88573004B9294 /* Models */,
-				667F30CD27B8856C004B9294 /* ViewModels */,
-				667F30CC27B88564004B9294 /* Scenes */,
-			);
-			path = Movies;
-			sourceTree = "<group>";
-		};
-		667F30CC27B88564004B9294 /* Scenes */ = {
-			isa = PBXGroup;
-			children = (
-				667F309C27B88494004B9294 /* MoviesViewController.swift */,
-			);
-			path = Scenes;
-			sourceTree = "<group>";
-		};
-		667F30CD27B8856C004B9294 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		667F30CE27B88573004B9294 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		667F30CF27B8858A004B9294 /* Models */ = {
@@ -297,14 +259,12 @@
 				66604F0227B961FB00979B0F /* GenreView.swift in Sources */,
 				665092FD27C165FD00D867B9 /* ImageCache.swift in Sources */,
 				6650930127C18AE300D867B9 /* BookListHeaderView.swift in Sources */,
-				667F309D27B88494004B9294 /* MoviesViewController.swift in Sources */,
 				66604EF927B8ABE400979B0F /* BooksViewModel.swift in Sources */,
 				66A4332527C47A9D00E00915 /* StoreButtonStackView.swift in Sources */,
 				66604EFD27B8B37B00979B0F /* BooksModel.swift in Sources */,
 				66604EFB27B8AC2A00979B0F /* NYTBooksAPI.swift in Sources */,
 				66A4332127C41DC600E00915 /* AttributeStackView.swift in Sources */,
 				665092F827C1552900D867B9 /* AsyncImageView.swift in Sources */,
-				66604EF727B8A94400979B0F /* NYBestRootViewController.swift in Sources */,
 				66A4332327C4226A00E00915 /* RankView.swift in Sources */,
 				66BF228E27B8962E00B52410 /* BooksViewController.swift in Sources */,
 				667F309927B88494004B9294 /* AppDelegate.swift in Sources */,
