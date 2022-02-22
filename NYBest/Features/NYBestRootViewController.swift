@@ -18,9 +18,10 @@ class NYBestRootViewController: UITabBarController {
         viewControllers = [MoviesViewController(), BookNavigationViewController()]
         guard let vcs = viewControllers else { return }
         selectedViewController = vcs[0]
-        
+        self.tabBar.backgroundColor = .systemBackground
         vcs[0].tabBarItem = UITabBarItem(title: "Movies", image: UIImage(systemName: "play.rectangle.on.rectangle.fill"), tag: 0)
         vcs[1].tabBarItem = UITabBarItem(title: "Books", image: UIImage(systemName: "books.vertical.fill") , tag: 1)
+        
     }
 
 }

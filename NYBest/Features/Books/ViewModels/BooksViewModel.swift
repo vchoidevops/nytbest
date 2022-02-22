@@ -11,14 +11,12 @@ import Combine
 final class BooksViewModel {
     var genres = CurrentValueSubject<[Genre]?, Never>(nil)
     var totalGenres: [Genre] = []
-    var searchText = PassthroughSubject<String?, Never>()
+    var searchText = CurrentValueSubject<String, Never>("")
     var listFilters = CurrentValueSubject<Set<Int>, Never>([])
     var trashBag = Set<AnyCancellable>()
     
     init() {
         getBestSellers()
-        setupSearchTextBinding()
-        setupListFilters()
         setupCombineListfilterAndSearchFilter()
     }
     
@@ -44,87 +42,46 @@ final class BooksViewModel {
             .store(in: &trashBag)
     }
     
-    private func searchWithFilter(_ searchText: String) -> [Genre]? {
+    private func searchWithText(_ searchText: String) -> [Genre]? {
         if searchText.isEmpty {
             return self.totalGenres
         }
         let result: [Genre]? = self.totalGenres.filter { genre in
             let books = genre.books.filter { book in
-                return book.title.lowercased().contains(searchText.lowercased())
+                return book.title.lowercased().contains(searchText.lowercased()) || book.bookDescription.lowercased().contains(searchText.lowercased())
             }
             return books.count > 0
         }
         return result
     }
     
-    private func filterWithSearchTextAndListFilters(_ listFilters: Set<Int>, _ searchText: String?) -> [Genre]? {
+    private func filterWithSearchTextAndListFilters(_ listFilters: Set<Int>, _ searchText: String) -> [Genre]? {
         if listFilters.isEmpty {
-            return searchWithFilter(searchText ?? "")
+            return searchWithText(searchText)
         }
+        print("filters: \(listFilters) search: \(searchText)")
         let listFiltered = self.totalGenres.enumerated().filter { listFilters.contains($0.offset) }.map { $0.element }
-        print("List Filtered \(listFiltered.count)")
-        guard let searchText = searchText else { return listFiltered }
         
-        return listFiltered.filter { genre in
-            let books = genre.books.filter { book in
-                return book.title.lowercased().contains(searchText.lowercased())
-            }
-            return books.count > 0
-        }
-    }
-    
-    private func setupSearchTextBinding() {
-        searchText.debounce(for: 0.5, scheduler: RunLoop.main, options: nil)
-            .compactMap { $0 }
-            .map { self.searchWithFilter($0) }
-            .compactMap { $0 }
-            .eraseToAnyPublisher()
-            .sink(receiveCompletion: { error in
-                switch error {
-                case .failure(let error):
-//                    self.genres.send(completion: .failure(error))
-                    print("ERROR: \(error)")
-                case .finished:
-//                    self.genres.send(completion: .finished)
-                    print("FINISHED: ")
+        if searchText.isEmpty {
+            return listFiltered
+        } else {
+            return listFiltered.filter { genre in
+                let books = genre.books.filter { book in
+                    return book.title.lowercased().contains(searchText.lowercased()) || book.bookDescription.lowercased().contains(searchText.lowercased())
                 }
-            }, receiveValue: { genres in
-                self.genres.send(genres)
-            })
-            .store(in: &trashBag)
-    }
-    
-    private func filterWithListFilters(_ filters: Set<Int>) -> [Genre] {
-        if filters.isEmpty {
-            return self.totalGenres
-        }
-        return self.totalGenres.enumerated().filter { filters.contains($0.offset) }.map { $0.element }
-    }
-    
-    private func setupListFilters() {
-        listFilters.debounce(for: 0.5, scheduler: RunLoop.main, options: nil)
-            .map { self.filterWithListFilters($0) }
-            .eraseToAnyPublisher()
-            .sink { completion in
-                print("Completed: \(completion)")
-            } receiveValue: { genres in
-                print("List Filtered \(genres.count)")
-                self.genres.send(genres)
+                return books.count > 0
             }
-            .store(in: &trashBag)
-
+        }
     }
     
     private func setupCombineListfilterAndSearchFilter() {
-        listFilters.combineLatest(searchText)
-            .map { listfilters, searchText in
-                return self.filterWithSearchTextAndListFilters(listfilters, searchText)
-            }
+        Publishers.CombineLatest(searchText, listFilters)
+            .map { self.filterWithSearchTextAndListFilters($1, $0) }
             .compactMap { $0 }
             .eraseToAnyPublisher()
             .sink { completion in
                 print("\(completion)")
-            } receiveValue: { genres in
+            } receiveValue: { [unowned self] genres in
                 self.genres.send(genres)
             }
             .store(in: &trashBag)

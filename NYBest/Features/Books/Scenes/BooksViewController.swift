@@ -183,6 +183,14 @@ extension BooksViewController: UICollectionViewDelegate {
             cell.contentConfiguration = genreConfig
             
             viewModel.listFilters.send(filters)
+        } else { // Select Book Cover
+            guard let genres = viewModel.genres.value else { return }
+            let vc = BookDetailViewController()
+            let section = genres[indexPath.section - 1]
+            let book = section.books[indexPath.row]
+            vc.book = book
+            vc.listName = section.listName
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 }

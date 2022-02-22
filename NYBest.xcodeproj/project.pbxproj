@@ -22,6 +22,11 @@
 		667F309D27B88494004B9294 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667F309C27B88494004B9294 /* MoviesViewController.swift */; };
 		667F30A227B88496004B9294 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 667F30A127B88496004B9294 /* Assets.xcassets */; };
 		667F30A527B88496004B9294 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 667F30A327B88496004B9294 /* LaunchScreen.storyboard */; };
+		66A4331C27C40B8F00E00915 /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A4331B27C40B8F00E00915 /* BookDetailViewController.swift */; };
+		66A4331F27C41BB000E00915 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A4331E27C41BB000E00915 /* UIFont.swift */; };
+		66A4332127C41DC600E00915 /* AttributeStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A4332027C41DC600E00915 /* AttributeStackView.swift */; };
+		66A4332327C4226A00E00915 /* RankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A4332227C4226A00E00915 /* RankView.swift */; };
+		66A4332527C47A9D00E00915 /* StoreButtonStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A4332427C47A9D00E00915 /* StoreButtonStackView.swift */; };
 		66BF228E27B8962E00B52410 /* BooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BF228D27B8962E00B52410 /* BooksViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +48,11 @@
 		667F30A127B88496004B9294 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		667F30A427B88496004B9294 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		668CEA9B27B8A4B100293264 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66A4331B27C40B8F00E00915 /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
+		66A4331E27C41BB000E00915 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
+		66A4332027C41DC600E00915 /* AttributeStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeStackView.swift; sourceTree = "<group>"; };
+		66A4332227C4226A00E00915 /* RankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankView.swift; sourceTree = "<group>"; };
+		66A4332427C47A9D00E00915 /* StoreButtonStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreButtonStackView.swift; sourceTree = "<group>"; };
 		66BF228D27B8962E00B52410 /* BooksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,6 +82,9 @@
 				66604F0127B961FB00979B0F /* GenreView.swift */,
 				665092F527C1511B00D867B9 /* BookView.swift */,
 				6650930027C18AE300D867B9 /* BookListHeaderView.swift */,
+				66A4332027C41DC600E00915 /* AttributeStackView.swift */,
+				66A4332227C4226A00E00915 /* RankView.swift */,
+				66A4332427C47A9D00E00915 /* StoreButtonStackView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -95,6 +108,7 @@
 		667F309727B88494004B9294 /* NYBest */ = {
 			isa = PBXGroup;
 			children = (
+				66A4331D27C41B9B00E00915 /* Extensions */,
 				665092F927C1555D00D867B9 /* Common */,
 				668CEA9B27B8A4B100293264 /* Info.plist */,
 				667F30D227B8859D004B9294 /* Services */,
@@ -189,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				66BF228D27B8962E00B52410 /* BooksViewController.swift */,
+				66A4331B27C40B8F00E00915 /* BookDetailViewController.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -199,6 +214,14 @@
 				66604EFA27B8AC2A00979B0F /* NYTBooksAPI.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		66A4331D27C41B9B00E00915 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				66A4331E27C41BB000E00915 /* UIFont.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,15 +299,20 @@
 				6650930127C18AE300D867B9 /* BookListHeaderView.swift in Sources */,
 				667F309D27B88494004B9294 /* MoviesViewController.swift in Sources */,
 				66604EF927B8ABE400979B0F /* BooksViewModel.swift in Sources */,
+				66A4332527C47A9D00E00915 /* StoreButtonStackView.swift in Sources */,
 				66604EFD27B8B37B00979B0F /* BooksModel.swift in Sources */,
 				66604EFB27B8AC2A00979B0F /* NYTBooksAPI.swift in Sources */,
+				66A4332127C41DC600E00915 /* AttributeStackView.swift in Sources */,
 				665092F827C1552900D867B9 /* AsyncImageView.swift in Sources */,
 				66604EF727B8A94400979B0F /* NYBestRootViewController.swift in Sources */,
+				66A4332327C4226A00E00915 /* RankView.swift in Sources */,
 				66BF228E27B8962E00B52410 /* BooksViewController.swift in Sources */,
 				667F309927B88494004B9294 /* AppDelegate.swift in Sources */,
 				6650930327C271CD00D867B9 /* BookNavigationViewController.swift in Sources */,
+				66A4331F27C41BB000E00915 /* UIFont.swift in Sources */,
 				667F309B27B88494004B9294 /* SceneDelegate.swift in Sources */,
 				665092F627C1511B00D867B9 /* BookView.swift in Sources */,
+				66A4331C27C40B8F00E00915 /* BookDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,7 @@ enum AsyncImageViewError: Error {
 }
 
 class AsyncImageView: UIImageView {
+    private var loader: UIActivityIndicatorView = UIActivityIndicatorView(style: .medium)
     var url: String? {
         didSet {
             guard let url = self.url else { return }
@@ -22,6 +23,12 @@ class AsyncImageView: UIImageView {
     init(frame: CGRect, url: String?) {
         super.init(frame: frame)
         self.url = url
+        self.loader.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(loader)
+        NSLayoutConstraint.activate([
+            loader.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            loader.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+        ])
     }
     
     required init?(coder: NSCoder) {
@@ -31,9 +38,13 @@ class AsyncImageView: UIImageView {
 
 extension AsyncImageView {
     private func load(url: String) {
+        DispatchQueue.main.async {
+            self.loader.startAnimating()
+        }
         if let imageFromCache = ImageCache().get(url: url as NSString) {
             DispatchQueue.main.async {
                 self.image = imageFromCache
+                self.loader.stopAnimating()
             }
             
         } else {
@@ -46,6 +57,7 @@ extension AsyncImageView {
                 ImageCache().add(image: image, url: url as NSString)
                 DispatchQueue.main.async {
                     self.image = image
+                    self.loader.stopAnimating()
                 }
             }.resume()
         }
