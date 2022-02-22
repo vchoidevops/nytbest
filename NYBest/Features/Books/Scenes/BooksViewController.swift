@@ -153,7 +153,7 @@ extension BooksViewController {
             supplementaryView.layer.borderWidth = 0
         }
         datasource.supplementaryViewProvider = {
-            [weak self] collectionView, kind, indexPath in
+            collectionView, kind, indexPath in
             if indexPath.section != 0 {
                 return collectionView.dequeueConfiguredReusableSupplementary(using: headerRegistration, for: indexPath)
             } else {
