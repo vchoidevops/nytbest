@@ -114,25 +114,27 @@ class BookDetailViewController: UIViewController {
     }
     
     private func setupDescriptionContent() {
-        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
-        titleLabel.text = "Description"
-        titleLabel.numberOfLines = 0
-        titleLabel.font = .systemFont(ofSize: 24, weight: .semibold)
-        
-        descriptionStack.insertArrangedSubview(titleLabel, at: 0)
-        
-        let descriptionLabel = UILabel()
-        descriptionLabel.text = book.bookDescription
-        descriptionLabel.numberOfLines = 0
-        descriptionLabel.font = .systemFont(ofSize: 14, weight: .regular)
-        
-        descriptionStack.insertArrangedSubview(descriptionLabel, at: 1)
-        view.addSubview(descriptionStack)
-        NSLayoutConstraint.activate([
-            descriptionStack.topAnchor.constraint(equalTo: topContainer.bottomAnchor, constant: 20),
-            descriptionStack.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
-            descriptionStack.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16)
-        ])
+        if book.bookDescription.count > 0 {
+            let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
+            titleLabel.text = "Description"
+            titleLabel.numberOfLines = 0
+            titleLabel.font = .systemFont(ofSize: 24, weight: .semibold)
+            
+            descriptionStack.insertArrangedSubview(titleLabel, at: 0)
+            
+            let descriptionLabel = UILabel()
+            descriptionLabel.text = book.bookDescription
+            descriptionLabel.numberOfLines = 0
+            descriptionLabel.font = .systemFont(ofSize: 14, weight: .regular)
+            
+            descriptionStack.insertArrangedSubview(descriptionLabel, at: 1)
+            view.addSubview(descriptionStack)
+            NSLayoutConstraint.activate([
+                descriptionStack.topAnchor.constraint(equalTo: topContainer.bottomAnchor, constant: 20),
+                descriptionStack.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
+                descriptionStack.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16)
+            ])
+        }
     }
     
     private func setupStoreBuyButtons() {
@@ -147,8 +149,12 @@ class BookDetailViewController: UIViewController {
         storeStack.insertArrangedSubview(storeButtons, at: 1)
         
         view.addSubview(storeStack)
+        if book.bookDescription.count > 0 {
+            storeStack.topAnchor.constraint(equalTo: descriptionStack.bottomAnchor, constant: 20).isActive = true
+        } else {
+            storeStack.topAnchor.constraint(equalTo: topContainer.bottomAnchor, constant: 20).isActive = true
+        }
         NSLayoutConstraint.activate([
-            storeStack.topAnchor.constraint(equalTo: descriptionStack.bottomAnchor, constant: 20),
             storeStack.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
             storeStack.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16)
         ])

@@ -30,12 +30,14 @@ class BooksViewController: UIViewController {
         
     }
     private func setupTapRecognizer() {
-//        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleKeyboardNotification))
-//        view.addGestureRecognizer(tapRecognizer)
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleKeyboardNotification))
+        view.addGestureRecognizer(tapRecognizer)
+        tapRecognizer.delegate = self
     }
     
     @objc private func handleKeyboardNotification(gesture: UITapGestureRecognizer) {
-//        searchBar.endEditing(true)
+        print("Notification ===> ")
+        searchBar.endEditing(true)
     }
     
     private func setupNavigationItem() {
@@ -51,6 +53,7 @@ class BooksViewController: UIViewController {
     private func setupSearchField() {
         searchBar = UISearchBar()
         searchBar.backgroundColor = .systemBackground
+        searchBar.searchBarStyle = .minimal
         searchBar.delegate = self
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(searchBar)
@@ -214,5 +217,18 @@ extension BooksViewController: UISearchBarDelegate {
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+    }
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+}
+
+extension BooksViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if let eventClass = touch.view?.superview?.description, !eventClass.contains("UISearchBar") {
+            print("EVENT CLASS: \(eventClass.contains("UISearchBar"))")
+            searchBar.endEditing(true)
+        }
+        return false
     }
 }

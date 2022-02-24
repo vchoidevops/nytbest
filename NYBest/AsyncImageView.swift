@@ -48,18 +48,15 @@ extension AsyncImageView {
             }
             
         } else {
-            URLSession.shared.dataTask(with: URL(string: url)!) { data, response, error in
-                if error != nil {
-                    print("Error to download image")
-                    return
-                }
+            DispatchQueue.global(qos: .background).async {
+                let data = try? Data(contentsOf: URL(string: url)!)
                 guard let data = data, let image = UIImage(data: data) else { return }
                 ImageCache().add(image: image, url: url as NSString)
                 DispatchQueue.main.async {
                     self.image = image
                     self.loader.stopAnimating()
                 }
-            }.resume()
+            }
         }
     }
 }
