@@ -33,7 +33,7 @@ class AsyncImageView: UIImageView {
     
     required init?(coder: NSCoder) {
         fatalError("not implemented")
-    }
+    } 
 }
 
 extension AsyncImageView {

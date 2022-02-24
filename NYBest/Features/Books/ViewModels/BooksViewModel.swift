@@ -28,12 +28,6 @@ final class BooksViewModel {
             .map(\.lists)
             .sink(receiveCompletion: { completion in
                 print("Completion: \(completion)")
-//                switch error {
-//                case .failure(let error):
-//                    self.genres.send(completion: .failure(error))
-//                case .finished:
-//                    self.genres.send(completion: .finished)
-//                }
             }, receiveValue: { [weak self] data in
                 guard let data = data, let self = self else { return }
                 self.genres.send(data)
