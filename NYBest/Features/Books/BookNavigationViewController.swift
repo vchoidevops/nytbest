@@ -2,7 +2,7 @@
 //  BookNavigationViewController.swift
 //  NYBest
 //
-//  Created by victor.choi on 2/20/22.
+//  Created by Woongshik Choi on 2/20/22.
 //
 
 import UIKit

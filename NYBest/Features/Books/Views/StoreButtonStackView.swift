@@ -2,7 +2,7 @@
 //  StoreButtonStackView.swift
 //  NYBest
 //
-//  Created by victor.choi on 2/21/22.
+//  Created by Woongshik Choi on 2/21/22.
 //
 
 import UIKit
@@ -53,9 +53,6 @@ class StoreButtonStackView: UIStackView, StoreButtonStackViewType {
         self.insertArrangedSubview(amazonBookStoreButton, at: 0)
         self.insertArrangedSubview(barnesNobleButton, at: 1)
         self.insertArrangedSubview(appleBookStoreButton, at: 2)
-        
-        
-        
     }
     
     required init(coder: NSCoder) {

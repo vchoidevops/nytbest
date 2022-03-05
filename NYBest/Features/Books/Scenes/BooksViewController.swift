@@ -2,7 +2,7 @@
 //  BooksViewController.swift
 //  NYBest
 //
-//  Created by victor.choi on 2/12/22.
+//  Created by Woongshik Choi on 2/12/22.
 //
 
 import UIKit
@@ -24,10 +24,7 @@ class BooksViewController: UIViewController {
         self.configDataSource()
         self.setupBindings()
         self.setupNavigationItem()
-        
-        // 1. Check Where a user taps
-        setupTapRecognizer()
-        
+        self.setupTapRecognizer()
     }
     private func setupTapRecognizer() {
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleKeyboardNotification))

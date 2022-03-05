@@ -2,7 +2,7 @@
 //  UIFont.swift
 //  NYBest
 //
-//  Created by victor.choi on 2/21/22.
+//  Created by Woongshik Choi on 2/21/22.
 //
 
 import UIKit

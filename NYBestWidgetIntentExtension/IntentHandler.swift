@@ -2,7 +2,7 @@
 //  IntentHandler.swift
 //  NYBestWidgetIntentExtension
 //
-//  Created by victor.choi on 3/4/22.
+//  Created by Woongshik Choi on 3/4/22.
 //
 
 import Intents

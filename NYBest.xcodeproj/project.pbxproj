@@ -11,6 +11,9 @@
 		660D8A1B27D24BF7008FF847 /* BooksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66604EFC27B8B37B00979B0F /* BooksModel.swift */; };
 		660D8A1C27D24C05008FF847 /* NYTBooksAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66604EFA27B8AC2A00979B0F /* NYTBooksAPI.swift */; };
 		6616DAB527D40C4500684044 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665092FC27C165FD00D867B9 /* ImageCache.swift */; };
+		6616DAB927D4291000684044 /* app.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6616DAB827D4291000684044 /* app.plist */; };
+		6616DABA27D4291000684044 /* app.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6616DAB827D4291000684044 /* app.plist */; };
+		6616DABB27D4291000684044 /* app.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6616DAB827D4291000684044 /* app.plist */; };
 		661DD84C27CAD2140098B6C6 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661DD84B27CAD2140098B6C6 /* WidgetKit.framework */; };
 		661DD84E27CAD2140098B6C6 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661DD84D27CAD2140098B6C6 /* SwiftUI.framework */; };
 		661DD85127CAD2140098B6C6 /* NYBestWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661DD85027CAD2140098B6C6 /* NYBestWidget.swift */; };
@@ -79,6 +82,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6616DAB627D4227600684044 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		6616DAB827D4291000684044 /* app.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = app.plist; sourceTree = "<group>"; };
 		661DD84927CAD2140098B6C6 /* NYBestWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NYBestWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		661DD84B27CAD2140098B6C6 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		661DD84D27CAD2140098B6C6 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -141,6 +146,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6616DAB727D428E600684044 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				6616DAB827D4291000684044 /* app.plist */,
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
 		661DD84A27CAD2140098B6C6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +200,7 @@
 		667F308C27B88494004B9294 = {
 			isa = PBXGroup;
 			children = (
+				6616DAB627D4227600684044 /* README.md */,
 				667F309727B88494004B9294 /* NYBest */,
 				661DD84F27CAD2140098B6C6 /* NYBestWidget */,
 				66D12F1F27D2482D00E64B76 /* NYBestWidgetIntentExtension */,
@@ -208,6 +222,7 @@
 		667F309727B88494004B9294 /* NYBest */ = {
 			isa = PBXGroup;
 			children = (
+				6616DAB727D428E600684044 /* Config */,
 				66A4331D27C41B9B00E00915 /* Extensions */,
 				665092F927C1555D00D867B9 /* Common */,
 				668CEA9B27B8A4B100293264 /* Info.plist */,
@@ -402,6 +417,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6616DABA27D4291000684044 /* app.plist in Resources */,
 				661DD85427CAD2150098B6C6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,6 +427,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				667F30A527B88496004B9294 /* LaunchScreen.storyboard in Resources */,
+				6616DAB927D4291000684044 /* app.plist in Resources */,
 				667F30A227B88496004B9294 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -419,6 +436,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6616DABB27D4291000684044 /* app.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,12 +526,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = TJ4KC76BFC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYBestWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NYBestWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -525,7 +544,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -535,12 +554,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = TJ4KC76BFC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYBestWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NYBestWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -552,7 +572,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -685,7 +705,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = TJ4KC76BFC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = /Users/victor.choi/Developer/prj/NYBest/NYBest/Info.plist;
@@ -714,7 +734,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = TJ4KC76BFC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = /Users/victor.choi/Developer/prj/NYBest/NYBest/Info.plist;
@@ -740,7 +760,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = TJ4KC76BFC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYBestWidgetIntentExtension/Info.plist;
@@ -758,7 +778,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -766,7 +786,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = TJ4KC76BFC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NYBestWidgetIntentExtension/Info.plist;
@@ -784,7 +804,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

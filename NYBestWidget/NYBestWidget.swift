@@ -2,7 +2,7 @@
 //  NYBestWidget.swift
 //  NYBestWidget
 //
-//  Created by victor.choi on 2/26/22.
+//  Created by Woongshik Choi on 2/26/22.
 //
 
 import WidgetKit
@@ -72,7 +72,7 @@ struct BookEntry: TimelineEntry {
     let bookImage: UIImage
     
     static var placeholder: BookEntry {
-        BookEntry(date: Date(), configuration: GenreIntent(), bookTitle: "Test", bookImage: UIImage(systemName: "rectangle")!)
+        BookEntry(date: Date(), configuration: GenreIntent(), bookTitle: "THE PARIS APARTMENT", bookImage: UIImage(named: "sample_cover")!)
     }
 }
 
@@ -97,6 +97,7 @@ struct NYBestWidget: Widget {
         IntentConfiguration(kind: kind, intent: GenreIntent.self, provider: BestSellerProvider()) { entry in
             NYBestWidgetEntryView(entry: entry)
         }
+        .supportedFamilies([.systemSmall])
         .configurationDisplayName("Bestsellers")
         .description("Select a genre to see the top seller")
     }

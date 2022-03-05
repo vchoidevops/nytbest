@@ -2,7 +2,7 @@
 //  GenreView.swift
 //  NYBest
 //
-//  Created by victor.choi on 2/13/22.
+//  Created by Woongshik Choi on 2/13/22.
 //
 
 import UIKit

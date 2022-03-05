@@ -2,7 +2,7 @@
 //  BookListHeaderView.swift
 //  NYBest
 //
-//  Created by victor.choi on 2/19/22.
+//  Created by Woongshik Choi on 2/19/22.
 //
 
 import UIKit

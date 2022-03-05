@@ -2,7 +2,7 @@
 //  NYTAPI.swift
 //  NYBest
 //
-//  Created by victor.choi on 2/12/22.
+//  Created by Woongshik Choi on 2/12/22.
 //
 
 import Foundation
@@ -12,7 +12,14 @@ fileprivate enum NYTBooksAPIConstants: String {
     case scheme = "https"
     case host = "api.nytimes.com"
     case path = "/svc/books/v3"
-    case token = "A7c7lUtXoOAHe5LGQoLPjRP0nTVQLdW1"
+}
+extension NYTBooksAPIConstants {
+    static var token: String? {
+        guard let filePath = Bundle.main.path(forResource: "app", ofType: "plist") else { fatalError("Failed to find the file path") }
+        let plist = NSDictionary(contentsOfFile: filePath)
+        guard let value = plist?.object(forKey: "token") as? String else { fatalError("Failed to read the token")}
+        return value
+    }
 }
 
 enum NYTAPIErrors: Error {
@@ -63,7 +70,7 @@ extension NYTBooksAPI: NYTAPI {
     var queryItems: [URLQueryItem]? {
         switch self {
         default:
-            return [URLQueryItem(name: "api-key", value: NYTBooksAPIConstants.token.rawValue)]
+            return [URLQueryItem(name: "api-key", value: NYTBooksAPIConstants.token ?? "")]
         }
     }
     
