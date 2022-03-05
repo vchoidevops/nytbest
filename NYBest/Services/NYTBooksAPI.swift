@@ -36,6 +36,19 @@ enum NYTBooksAPI {
 }
 
 extension NYTBooksAPI: NYTAPI {
+    func run<T: Codable>() async throws -> T {
+        do {
+            let (data, _) = try await URLSession.shared.data(for: self.request, delegate: nil)
+            do {
+                let decoded = try JSONDecoder().decode(T.self, from: data)
+                return decoded
+            } catch {
+                throw NYTAPIErrors.decodingError
+            }
+        } catch {
+            throw NYTAPIErrors.requestError
+        }
+    }
     func runPublisher<T>() -> AnyPublisher<T, Error> where T: Codable {
         return URLSession.shared.dataTaskPublisher(for: self.request)
             .subscribe(on: DispatchQueue.global(qos: .background))
@@ -75,20 +88,6 @@ extension NYTBooksAPI: NYTAPI {
             urlRequest.httpMethod = self.method
             urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
             return urlRequest
-        }
-    }
-    
-    func run<T>() async throws -> T where T : Decodable, T : Encodable {
-        do {
-            let (data, _) = try await URLSession.shared.data(for: self.request, delegate: nil)
-            do {
-                let decoded: T = try JSONDecoder().decode(T.self, from: data)
-                return decoded
-            } catch {
-                throw NYTAPIErrors.decodingError
-            }
-        } catch {
-            throw NYTAPIErrors.requestError
         }
     }
     

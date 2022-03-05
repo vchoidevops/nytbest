@@ -192,7 +192,6 @@ class BookDetailViewController: UIViewController {
 
 extension BookDetailViewController: StoreButtonStackViewDelegate {
     func didTapButton(_ index: Int) {
-        print("Index: \(index)")
         let webView = SFSafariViewController(url: findBuylink(index))
         self.navigationController?.present(webView, animated: true, completion: nil)
     }

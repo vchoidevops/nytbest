@@ -16,7 +16,9 @@ class AsyncImageView: UIImageView {
     var url: String? {
         didSet {
             guard let url = self.url else { return }
-            self.load(url: url)
+            Task.init(priority: .background) {
+                try await self.load(url: url)
+            }
         }
     }
     
@@ -37,26 +39,18 @@ class AsyncImageView: UIImageView {
 }
 
 extension AsyncImageView {
-    private func load(url: String) {
+    private func load(url: String) async throws {
         DispatchQueue.main.async {
             self.loader.startAnimating()
         }
-        if let imageFromCache = ImageCache().get(url: url as NSString) {
+        do {
+            let imageFromCache = try await ImageCache.publicCache.get(url: url as NSString)
             DispatchQueue.main.async {
                 self.image = imageFromCache
                 self.loader.stopAnimating()
             }
-            
-        } else {
-            DispatchQueue.global(qos: .background).async {
-                let data = try? Data(contentsOf: URL(string: url)!)
-                guard let data = data, let image = UIImage(data: data) else { return }
-                ImageCache().add(image: image, url: url as NSString)
-                DispatchQueue.main.async {
-                    self.image = image
-                    self.loader.stopAnimating()
-                }
-            }
+        } catch {
+            self.loader.stopAnimating()
         }
     }
 }

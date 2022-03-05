@@ -36,7 +36,6 @@ class BooksViewController: UIViewController {
     }
     
     @objc private func handleKeyboardNotification(gesture: UITapGestureRecognizer) {
-        print("Notification ===> ")
         searchBar.endEditing(true)
     }
     
@@ -226,7 +225,6 @@ extension BooksViewController: UISearchBarDelegate {
 extension BooksViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if let eventClass = touch.view?.superview?.description, !eventClass.contains("UISearchBar") {
-            print("EVENT CLASS: \(eventClass.contains("UISearchBar"))")
             searchBar.endEditing(true)
         }
         return false

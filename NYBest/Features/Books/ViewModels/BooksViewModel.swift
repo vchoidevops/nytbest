@@ -45,6 +45,13 @@ final class BooksViewModel {
                 return book.title.lowercased().contains(searchText.lowercased()) || book.bookDescription.lowercased().contains(searchText.lowercased())
             }
             return books.count > 0
+        }.map { genre in
+            var g = genre
+            let filteredBooks = genre.books.filter { book in
+                return book.title.lowercased().contains(searchText.lowercased()) || book.bookDescription.lowercased().contains(searchText.lowercased())
+            }
+            g.books = filteredBooks
+            return g
         }
         return result
     }
@@ -53,7 +60,6 @@ final class BooksViewModel {
         if listFilters.isEmpty {
             return searchWithText(searchText)
         }
-        print("filters: \(listFilters) search: \(searchText)")
         let listFiltered = self.totalGenres.enumerated().filter { listFilters.contains($0.offset) }.map { $0.element }
         
         if searchText.isEmpty {
@@ -64,6 +70,13 @@ final class BooksViewModel {
                     return book.title.lowercased().contains(searchText.lowercased()) || book.bookDescription.lowercased().contains(searchText.lowercased())
                 }
                 return books.count > 0
+            }.map { genre in
+                var g = genre
+                let filteredBooks = genre.books.filter { book in
+                    return book.title.lowercased().contains(searchText.lowercased()) || book.bookDescription.lowercased().contains(searchText.lowercased())
+                }
+                g.books = filteredBooks
+                return g
             }
         }
     }

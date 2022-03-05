@@ -105,7 +105,7 @@ struct Genre: Codable, Identifiable, Hashable {
     let listName, listNameEncoded, displayName: String
     let updated: Updated
     let listImage, listImageWidth, listImageHeight: String?
-    let books: [Book]
+    var books: [Book]
 
     enum CodingKeys: String, CodingKey {
         case id = "list_id"
