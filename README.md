@@ -1,3 +1,5 @@
+![Screenshot](https://github.com/vchoidevops/nytbest/blob/main/Apple%20iPhone%208%20Plus%20Screenshot%200.png)
+
 #  NYBest
 This is one of my iOS Portfolio. In this project, I developed New York Times bestsellers using [NYTimes Books API](https://developer.nytimes.com/).
 
