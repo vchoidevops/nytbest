@@ -14,6 +14,9 @@
 		6616DAB927D4291000684044 /* app.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6616DAB827D4291000684044 /* app.plist */; };
 		6616DABA27D4291000684044 /* app.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6616DAB827D4291000684044 /* app.plist */; };
 		6616DABB27D4291000684044 /* app.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6616DAB827D4291000684044 /* app.plist */; };
+		6616DABD27D42B0E00684044 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6616DABC27D42B0E00684044 /* .gitignore */; };
+		6616DABE27D42B0E00684044 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6616DABC27D42B0E00684044 /* .gitignore */; };
+		6616DABF27D42B0E00684044 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6616DABC27D42B0E00684044 /* .gitignore */; };
 		661DD84C27CAD2140098B6C6 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661DD84B27CAD2140098B6C6 /* WidgetKit.framework */; };
 		661DD84E27CAD2140098B6C6 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661DD84D27CAD2140098B6C6 /* SwiftUI.framework */; };
 		661DD85127CAD2140098B6C6 /* NYBestWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661DD85027CAD2140098B6C6 /* NYBestWidget.swift */; };
@@ -84,6 +87,7 @@
 /* Begin PBXFileReference section */
 		6616DAB627D4227600684044 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6616DAB827D4291000684044 /* app.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = app.plist; sourceTree = "<group>"; };
+		6616DABC27D42B0E00684044 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		661DD84927CAD2140098B6C6 /* NYBestWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NYBestWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		661DD84B27CAD2140098B6C6 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		661DD84D27CAD2140098B6C6 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -200,6 +204,7 @@
 		667F308C27B88494004B9294 = {
 			isa = PBXGroup;
 			children = (
+				6616DABC27D42B0E00684044 /* .gitignore */,
 				6616DAB627D4227600684044 /* README.md */,
 				667F309727B88494004B9294 /* NYBest */,
 				661DD84F27CAD2140098B6C6 /* NYBestWidget */,
@@ -418,6 +423,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6616DABA27D4291000684044 /* app.plist in Resources */,
+				6616DABE27D42B0E00684044 /* .gitignore in Resources */,
 				661DD85427CAD2150098B6C6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -426,6 +432,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6616DABD27D42B0E00684044 /* .gitignore in Resources */,
 				667F30A527B88496004B9294 /* LaunchScreen.storyboard in Resources */,
 				6616DAB927D4291000684044 /* app.plist in Resources */,
 				667F30A227B88496004B9294 /* Assets.xcassets in Resources */,
@@ -436,6 +443,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6616DABF27D42B0E00684044 /* .gitignore in Resources */,
 				6616DABB27D4291000684044 /* app.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
