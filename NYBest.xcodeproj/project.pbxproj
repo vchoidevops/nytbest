@@ -39,6 +39,7 @@
 		667F309B27B88494004B9294 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667F309A27B88494004B9294 /* SceneDelegate.swift */; };
 		667F30A227B88496004B9294 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 667F30A127B88496004B9294 /* Assets.xcassets */; };
 		667F30A527B88496004B9294 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 667F30A327B88496004B9294 /* LaunchScreen.storyboard */; };
+		6684A84A27D9765C00CDA6CE /* NYBestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6684A84927D9765C00CDA6CE /* NYBestTests.swift */; };
 		66A4331C27C40B8F00E00915 /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A4331B27C40B8F00E00915 /* BookDetailViewController.swift */; };
 		66A4331F27C41BB000E00915 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A4331E27C41BB000E00915 /* UIFont.swift */; };
 		66A4332127C41DC600E00915 /* AttributeStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A4332027C41DC600E00915 /* AttributeStackView.swift */; };
@@ -59,6 +60,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 661DD84827CAD2140098B6C6;
 			remoteInfo = NYBestWidgetExtension;
+		};
+		6684A84B27D9765C00CDA6CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 667F308D27B88494004B9294 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 667F309427B88494004B9294;
+			remoteInfo = NYBest;
 		};
 		66D12F2327D2482D00E64B76 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -109,6 +117,8 @@
 		667F309A27B88494004B9294 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		667F30A127B88496004B9294 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		667F30A427B88496004B9294 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6684A84727D9765C00CDA6CE /* NYBestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NYBestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6684A84927D9765C00CDA6CE /* NYBestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYBestTests.swift; sourceTree = "<group>"; };
 		668CEA9B27B8A4B100293264 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66A4331B27C40B8F00E00915 /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
 		66A4331E27C41BB000E00915 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
@@ -133,6 +143,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		667F309227B88494004B9294 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6684A84427D9765C00CDA6CE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -209,6 +226,7 @@
 				667F309727B88494004B9294 /* NYBest */,
 				661DD84F27CAD2140098B6C6 /* NYBestWidget */,
 				66D12F1F27D2482D00E64B76 /* NYBestWidgetIntentExtension */,
+				6684A84827D9765C00CDA6CE /* NYBestTests */,
 				661DD84A27CAD2140098B6C6 /* Frameworks */,
 				667F309627B88494004B9294 /* Products */,
 			);
@@ -220,6 +238,7 @@
 				667F309527B88494004B9294 /* NYBest.app */,
 				661DD84927CAD2140098B6C6 /* NYBestWidgetExtension.appex */,
 				66D12F1D27D2482D00E64B76 /* NYBestWidgetIntentExtension.appex */,
+				6684A84727D9765C00CDA6CE /* NYBestTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -302,6 +321,14 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		6684A84827D9765C00CDA6CE /* NYBestTests */ = {
+			isa = PBXGroup;
+			children = (
+				6684A84927D9765C00CDA6CE /* NYBestTests.swift */,
+			);
+			path = NYBestTests;
+			sourceTree = "<group>";
+		};
 		66A4331D27C41B9B00E00915 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -359,6 +386,24 @@
 			productReference = 667F309527B88494004B9294 /* NYBest.app */;
 			productType = "com.apple.product-type.application";
 		};
+		6684A84627D9765C00CDA6CE /* NYBestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6684A84F27D9765C00CDA6CE /* Build configuration list for PBXNativeTarget "NYBestTests" */;
+			buildPhases = (
+				6684A84327D9765C00CDA6CE /* Sources */,
+				6684A84427D9765C00CDA6CE /* Frameworks */,
+				6684A84527D9765C00CDA6CE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6684A84C27D9765C00CDA6CE /* PBXTargetDependency */,
+			);
+			name = NYBestTests;
+			productName = NYBestTests;
+			productReference = 6684A84727D9765C00CDA6CE /* NYBestTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		66D12F1C27D2482D00E64B76 /* NYBestWidgetIntentExtension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 66D12F2627D2482D00E64B76 /* Build configuration list for PBXNativeTarget "NYBestWidgetIntentExtension" */;
@@ -392,6 +437,10 @@
 					667F309427B88494004B9294 = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
+					6684A84627D9765C00CDA6CE = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = 667F309427B88494004B9294;
+					};
 					66D12F1C27D2482D00E64B76 = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
@@ -413,6 +462,7 @@
 				667F309427B88494004B9294 /* NYBest */,
 				661DD84827CAD2140098B6C6 /* NYBestWidgetExtension */,
 				66D12F1C27D2482D00E64B76 /* NYBestWidgetIntentExtension */,
+				6684A84627D9765C00CDA6CE /* NYBestTests */,
 			);
 		};
 /* End PBXProject section */
@@ -436,6 +486,13 @@
 				667F30A527B88496004B9294 /* LaunchScreen.storyboard in Resources */,
 				6616DAB927D4291000684044 /* app.plist in Resources */,
 				667F30A227B88496004B9294 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6684A84527D9765C00CDA6CE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +545,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6684A84327D9765C00CDA6CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6684A84A27D9765C00CDA6CE /* NYBestTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		66D12F1927D2482D00E64B76 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -508,6 +573,11 @@
 			isa = PBXTargetDependency;
 			target = 661DD84827CAD2140098B6C6 /* NYBestWidgetExtension */;
 			targetProxy = 661DD85827CAD2150098B6C6 /* PBXContainerItemProxy */;
+		};
+		6684A84C27D9765C00CDA6CE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 667F309427B88494004B9294 /* NYBest */;
+			targetProxy = 6684A84B27D9765C00CDA6CE /* PBXContainerItemProxy */;
 		};
 		66D12F2427D2482D00E64B76 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -764,6 +834,42 @@
 			};
 			name = Release;
 		};
+		6684A84D27D9765C00CDA6CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TJ4KC76BFC;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.victorchoi.NYBestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NYBest.app/NYBest";
+			};
+			name = Debug;
+		};
+		6684A84E27D9765C00CDA6CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TJ4KC76BFC;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.victorchoi.NYBestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NYBest.app/NYBest";
+			};
+			name = Release;
+		};
 		66D12F2727D2482D00E64B76 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -842,6 +948,15 @@
 			buildConfigurations = (
 				667F30C027B88496004B9294 /* Debug */,
 				667F30C127B88496004B9294 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6684A84F27D9765C00CDA6CE /* Build configuration list for PBXNativeTarget "NYBestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6684A84D27D9765C00CDA6CE /* Debug */,
+				6684A84E27D9765C00CDA6CE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
