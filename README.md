@@ -10,6 +10,7 @@ This is one of my iOS Portfolio. In this project, I developed New York Times bes
 - NYBest shows a book detail that a user selected.
 - NYBest provides buying links for a book.
 - NYBest provides iPhone widget which you can see the top seller for your favorite genre.
+- NYBest supports Dark mode.
 
 # Technologies
 - MVVM with Combine 
